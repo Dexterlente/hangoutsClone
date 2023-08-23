@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Sender</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .message-form {
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .success {
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="messageForm" class="message-form">
+      <label for="to">To:</label>
+      <input type="text" id="to" required><br>
+      <label for="body">Message:</label>
+      <textarea id="body" required></textarea><br>
+      <button type="submit">Send Message</button>
+      <p id="response" class="response"></p>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const messageForm = document.getElementById('messageForm');
+      const responseDiv = document.getElementById('response');
+
+      messageForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const to = document.getElementById('to').value;
+        const body = document.getElementById('body').value;
+
+        try {
+          const response = await fetch('http://localhost:5000/messages', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ to, body })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            responseDiv.textContent = 'Message sent successfully!';
+            responseDiv.classList.remove('error');
+            responseDiv.classList.add('success');
+          } else {
+            responseDiv.textContent = 'Message sending failed.';
+            responseDiv.classList.remove('success');
+            responseDiv.classList.add('error');
+          }
+        } catch (error) {
+          console.error(error);
+          responseDiv.textContent = 'An error occurred.';
+          responseDiv.classList.remove('success');
+          responseDiv.classList.add('error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
