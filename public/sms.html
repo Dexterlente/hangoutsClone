@@ -7,6 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: black;
     }
     .container {
       display: flex;
@@ -15,10 +16,42 @@
       height: 100vh;
     }
     .message-form {
-      width: 300px;
-      padding: 20px;
+      width: 400px;
+      padding: 30px;
+      border: 2px solid #ffd700; /* Gold border */
+      border-radius: 10px;
+      background-color: #fff8dc; /* Light gold background */
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .message-form label,
+    .message-form input,
+    .message-form textarea,
+    .message-form button {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    .message-form label {
+      font-weight: bold;
+      color: #444;
+    }
+    .message-form input,
+    .message-form textarea {
+      padding: 8px;
       border: 1px solid #ccc;
       border-radius: 5px;
+    }
+    .message-form button {
+      background-color: #ffd700; /* Gold button color */
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .response {
+      font-weight: bold;
+      margin-top: 10px;
     }
     .success {
       color: green;
@@ -32,9 +65,9 @@
   <div class="container">
     <form id="messageForm" class="message-form">
       <label for="to">To:</label>
-      <input type="text" id="to" required><br>
+      <input type="text" id="to" required>
       <label for="body">Message:</label>
-      <textarea id="body" required></textarea><br>
+      <textarea id="body" required></textarea>
       <button type="submit">Send Message</button>
       <p id="response" class="response"></p>
     </form>
@@ -63,10 +96,12 @@
           const data = await response.json();
 
           if (data.success) {
+            console.log('Message sent successfully!');
             responseDiv.textContent = 'Message sent successfully!';
             responseDiv.classList.remove('error');
             responseDiv.classList.add('success');
           } else {
+            console.log('Message sending failed!');
             responseDiv.textContent = 'Message sending failed.';
             responseDiv.classList.remove('success');
             responseDiv.classList.add('error');
