@@ -1,10 +1,13 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+// import bcrypt from "bcrypt";
+// import jwt from "jsonwebtoken";
+// import User from "../models/User.js";
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User.js");
 
 
 // registeer user
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const {
       firstName,
@@ -33,7 +36,7 @@ export const register = async (req, res) => {
 
 
 // login user
-export const login = async (req, res) => {
+const login = async (req, res) => {
     // trying if this function works
   try {
     // Extract email and password from the request body
@@ -54,7 +57,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {
+const logout = async (req, res) => {
     try {
       res.status(200).json({ message: "Logout successful." });
     } catch (err) {
@@ -62,3 +65,5 @@ export const logout = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+
+  module.exports = { register, login, logout };
