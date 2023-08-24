@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make Call</title>
+  <style>
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: black;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+label, input, button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: gold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e0a800;
+}
+
+  </style>
+</head>
+<body>
+    <div class="container">
+  <label for="phoneNumber">Recipient's Phone Number:</label>
+  <input type="text" id="phoneNumber" placeholder="Enter phone number">
+  <button id="makeCallBtn">Make Call</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const makeCallBtn = document.getElementById("makeCallBtn");
+  const phoneNumberInput = document.getElementById("phoneNumber");
+
+  makeCallBtn.addEventListener("click", async () => {
+    const phoneNumber = phoneNumberInput.value;
+    if (!phoneNumber) {
+      alert("Please enter a phone number");
+      return;
+    }
+
+    try {
+      const response = await fetch("/make-call", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ to: phoneNumber })
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        console.log("Call initiated successfully. Call SID: " + data.callSid);
+        alert("Call initiated successfully. Call SID: " + data.callSid);
+      } else {
+        console.log("Error: " + data.error);
+        alert("Error: " + data.error);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred. Please check the console.");
+    }
+  });
+});
+
+  </script>
+  </div>
+</body>
+</html>

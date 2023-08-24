@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incoming Messages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: gold;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .chat-box {
+      max-width: 400px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 223, 0, 0.8);
+      overflow-y: scroll;
+      max-height: 70vh;
+    }
+    .message {
+      margin-bottom: 10px;
+      padding: 5px;
+      border-bottom: 1px solid gold;
+      color: gold; 
+    }
+    .chat-title {
+    color: gold; 
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="chat-title">Received Messages</h1>
+    <div class="chat-box" id="messagesContainer">
+      <!-- Received messages will be displayed here -->
+    </div>
+  </div>
+  <script>
+    const messagesContainer = document.getElementById('messagesContainer');
+  
+    const fetchMessages = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/incoming');
+        const data = await response.json();
+        return data.messages;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+  
+    const renderMessages = (messages) => {
+      messagesContainer.innerHTML = '';
+  
+      messages.forEach((message) => {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.innerHTML = `
+          <p><strong>From:</strong> ${message.from}</p>
+          <p><strong>Message:</strong> ${message.body}</p>
+          <p><strong>Timestamp:</strong> ${message.timestamp}</p>
+          <hr>
+        `;
+        messagesContainer.appendChild(messageDiv);
+      });
+    };
+  
+    const refreshMessages = async () => {
+      const messages = await fetchMessages();
+      renderMessages(messages);
+    };
+  
+    refreshMessages(); // Initial fetch
+    setInterval(refreshMessages, 5000); // Refresh every 5 seconds
+  </script>
+  
+</body>
+</html>
