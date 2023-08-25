@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Form</title>
+  <title>Login Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -16,11 +16,11 @@
     }
 
     .container {
-      background-color: white;
+      background-color: #f9f9f9;
       border-radius: 10px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      width: 400px;
+      width: 300px;
     }
 
     form {
@@ -32,6 +32,7 @@
       margin: 0;
       font-size: 24px;
       text-align: center;
+      color: #d4af37;
     }
 
     .input-group {
@@ -43,7 +44,6 @@
       font-weight: bold;
     }
 
-    input[type="text"],
     input[type="email"],
     input[type="password"] {
       padding: 8px;
@@ -53,26 +53,22 @@
 
     button {
       padding: 10px;
-      background-color: #ffca28;
+      background-color: #d4af37;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
+
+    button:hover {
+      background-color: #c4972e;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <form id="registration-form">
-      <h2>Register</h2>
-      <div class="input-group">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" required>
-      </div>
-      <div class="input-group">
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName" required>
-      </div>
+    <form id="login-form">
+      <h2>Login</h2>
       <div class="input-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
@@ -81,31 +77,27 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
       </div>
-      <button type="submit">Register</button>
+      <button type="submit">Login</button>
     </form>
   </div>
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('registration-form');
+      const form = document.getElementById('login-form');
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const firstName = form.firstName.value;
-        const lastName = form.lastName.value;
         const email = form.email.value;
         const password = form.password.value;
 
         const userData = {
-          firstName,
-          lastName,
           email,
           password,
         };
 
         try {
-          const response = await fetch('/register', {
+          const response = await fetch('/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -114,13 +106,12 @@
           });
 
           if (response.ok) {
-            alert('Registration successful!');
+            alert('Login successful!');
             form.reset();
-            // Redirect to the home page
             window.location.href = '/';
           } else {
             const errorData = await response.json();
-            alert(`Registration failed: ${errorData.message}`);
+            alert(`Login failed: ${errorData.message}`);
           }
         } catch (error) {
           console.error('Error:', error);
