@@ -9,9 +9,7 @@
       font-family: Arial, sans-serif;
       background-color: black;
       margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      /* display: flex; */
       height: 100vh;
     }
 
@@ -21,6 +19,8 @@
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
       width: 300px;
+      margin: auto;
+      margin-top: 50px; 
     }
 
     form {
@@ -63,9 +63,40 @@
     button:hover {
       background-color: #c4972e;
     }
+    
+    .navbar {
+      background-color: #d4af37;
+      overflow: hidden;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      background-color: #c4972e;
+      color: white;
+    }
+
+    .navbar a.active {
+      background-color: #c4972e;
+      color: white;
+    }
   </style>
 </head>
 <body>
+    
+    <div class="navbar">
+        <a class="active" href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
   <div class="container">
     <form id="login-form">
       <h2>Login</h2>
