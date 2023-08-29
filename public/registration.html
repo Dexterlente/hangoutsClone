@@ -9,9 +9,6 @@
       font-family: Arial, sans-serif;
       background-color: black;
       margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
     }
 
@@ -21,6 +18,8 @@
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
       width: 400px;
+      margin: auto;
+      margin-top: 50px; 
     }
 
     form {
@@ -59,9 +58,43 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .navbar {
+      background-color: #d4af37;
+      overflow: hidden;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      background-color: #c4972e;
+      color: white;
+    }
+
+    .navbar a.active {
+      background-color: #c4972e;
+      color: white;
+    }
+    .navbar a.right {
+        float: right;
+    }
   </style>
 </head>
 <body>
+  <div class="navbar">
+    <a class="active" href="index.html">Home</a>
+    <!-- <a href="index.html">Contact Here</a>
+    <a href="lobby.html">Group Contact</a>
+    <a href="#">Contact</a> -->
+    <a class="right" href="login.html">Login</a>
+    <a class="right" href="registration.html">Registration</a>
+</div>
   <div class="container">
     <form id="registration-form">
       <h2>Register</h2>
