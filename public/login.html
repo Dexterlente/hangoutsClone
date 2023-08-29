@@ -87,15 +87,20 @@
       background-color: #c4972e;
       color: white;
     }
+    .navbar a.right {
+        float: right;
+    }
   </style>
 </head>
 <body>
     
     <div class="navbar">
-        <a class="active" href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
+        <a class="active" href="index.html">Home</a>
+        <a href="index.html">Contact Here</a>
+        <a href="lobby.html">Group Contact</a>
         <a href="#">Contact</a>
+        <a class="right" href="login.html">Login</a>
+        <a class="right" href="registration.html">Registration</a>
     </div>
   <div class="container">
     <form id="login-form">
@@ -137,16 +142,22 @@
           });
 
           if (response.ok) {
-            alert('Login successful!');
-            form.reset();
-            window.location.href = '/';
-          } else {
-            const errorData = await response.json();
-            alert(`Login failed: ${errorData.message}`);
-          }
-        } catch (error) {
-          console.error('Error:', error);
+          const responseData = await response.json();
+          const token = responseData.token;
+
+          // Store the token in session storage
+          sessionStorage.setItem('token', token);
+            console.log('token', token)
+          alert('Login successful!');
+          form.reset();
+          window.location.href = '/';
+        } else {
+          const errorData = await response.json();
+          alert(`Login failed: ${errorData.msg}`);
         }
+      } catch (error) {
+        console.error('Error:', error);
+      }
       });
     });
   </script>
