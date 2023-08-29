@@ -59,9 +59,42 @@
     .error {
       color: red;
     }
+    .navbar {
+            background-color: #d4af37;
+            overflow: hidden;
+            }
+
+    .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+
+    .navbar a:hover {
+    background-color: #c4972e;
+    color: white;
+    }
+
+    .navbar a.active {
+    background-color: #c4972e;
+    color: white;
+    }
+    .navbar a.right {
+        float: right;
+    }
   </style>
 </head>
 <body>
+  <div class="navbar">
+    <a class="active" href="index.html">Home</a>
+    <a href="index.html">Contact Here</a>
+    <a href="lobby.html">Group Contact</a>
+    <a href="sms.html">Send Messages</a>
+    <a href="incomingsms.html">Received Messages</a>
+</div>
   <div class="container">
     <form id="messageForm" class="message-form">
       <label for="to">To:</label>

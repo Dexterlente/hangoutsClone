@@ -2,8 +2,45 @@
     <head>
         <title>Meet the strangers</title>
         <link rel='stylesheet' href='./css/style.css'>
+        <style>
+            .navbar {
+            background-color: #d4af37;
+            overflow: hidden;
+            }
+
+            .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+
+            .navbar a:hover {
+            background-color: #c4972e;
+            color: white;
+            }
+
+            .navbar a.active {
+            background-color: #c4972e;
+            color: white;
+            }
+            .navbar a.right {
+                float: right;
+            }
+        </style>
     </head>
     <body>
+        <div class="navbar">
+            <a class="active" href="index.html">Home</a>
+            <a href="index.html">Contact Here</a>
+            <a href="lobby.html">Group Contact</a>
+            <a href="sms.html">Send Messages</a>
+            <a href="incomingsms.html">Received Messages</a>
+            <!-- <a class="right" href="login.html">Login</a>
+            <a class="right" href="registration.html">Registration</a> -->
+        </div>
         <div class='main_container'>
         <div class='dashboard_container'>
             <div class='logo_container'>
