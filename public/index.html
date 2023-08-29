@@ -127,5 +127,13 @@
         <script src='./js/recordingUtils.js' type='module'></script>
         <script src='./js/strangerUtils.js' type='module'></script>
         <script src='./js/main.js' type='module'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const token = sessionStorage.getItem('token');
+                if (!token) {
+                    window.location.href = '/login.html';
+                    }
+                });
+        </script>
     </body>
 </html>

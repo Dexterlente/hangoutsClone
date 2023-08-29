@@ -70,4 +70,12 @@
 <script type="text/javascript" src="js/chatRoom.js"></script>
 <script type="text/javascript" src="js/room_rtm.js"></script>
 <script type="text/javascript" src="js/room_chat_rtc.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/login.html';
+            }
+        });
+</script>
 </html>

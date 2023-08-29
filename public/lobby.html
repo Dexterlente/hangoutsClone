@@ -69,4 +69,12 @@
     
 </body>
 <script type="text/javascript" src="js/lobby.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/login.html';
+            }
+        });
+</script>
 </html>

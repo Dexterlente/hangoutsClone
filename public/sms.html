@@ -115,5 +115,13 @@
       });
     });
   </script>
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const token = sessionStorage.getItem('token');
+                if (!token) {
+                    window.location.href = '/login.html';
+                    }
+                });
+        </script>
 </body>
 </html>
