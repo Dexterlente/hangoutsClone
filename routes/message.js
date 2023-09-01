@@ -2,6 +2,7 @@ const express = require('express');
 const { Router } = require('express');
 const twilio = require('twilio');
 const dotenv = require('dotenv');
+const io = require('../socket');
 
 dotenv.config();
 
@@ -74,6 +75,28 @@ router.post('/make-call', async (req, res) => {
   }
 });
 
+router.use((req, res, next) => {
+  req.io = io; // Add 'io' to the request object
+  next();
+});
+
+// router.post('/inbound', (req, res) => {
+//   const twiml = new twilio.twiml.VoiceResponse();
+//   const dial = twiml.dial();
+//   twiml.say('Thank you for calling!');
+//   const incomingNumber = req.body.From;
+//   console.log('Incoming number:', incomingNumber);
+//   dial.client('user-client');
+
+//   res.type('text/xml');
+//   res.send(twiml.toString());
+//   // io.emit('incomingCall', { from: incomingNumber });
+//   if (req.io) {
+//     req.io.emit('incomingCall', { from: incomingNumber });
+//   } else {
+//     console.warn("'io' is not defined; event not emitted.");
+//   }
+// });
 router.post('/inbound', (req, res) => {
   const twiml = new twilio.twiml.VoiceResponse();
   const dial = twiml.dial();
@@ -84,6 +107,13 @@ router.post('/inbound', (req, res) => {
 
   res.type('text/xml');
   res.send(twiml.toString());
+  
+  // Emit the event using req.io
+  // if (req.io) {
+  //   req.io.emit('incomingCall', { from: incomingNumber });
+  // } else {
+  //   console.warn("'io' is not defined; event not emitted.");
+  // }
 });
 
 router.get('/generate-token', (req, res) => {

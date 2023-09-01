@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incoming Calls</title>
+    <!-- Include Socket.IO and other dependencies as needed -->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Incoming Calls</h1>
+    <div id="incomingCall"></div>
+    <script>
+        const socket = io(); // Connect to the Socket.IO server
+        const incomingCallDiv = document.getElementById('incomingCall');
+
+        // Listen for incoming call events
+        socket.on('incomingCall', (callInfo) => {
+            // Handle the incoming call notification
+            console.log('Incoming call:', callInfo);
+            // Display a notification to the user
+            incomingCallDiv.innerHTML = `Incoming call from: ${callInfo.from}`;
+        });
+    </script>
+</body>
+</html>
