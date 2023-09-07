@@ -40,6 +40,8 @@ router.post('/incoming', (req, res) => {
   console.log(`Received message from: ${from}`);
   console.log(`Message content: ${body}`);
   console.log(`Timestamp: ${timestamp}`);
+  console.log('Request headers:', req.headers);
+
 
   // Add the message to the array
   incomingMessages.push({ from, body, timestamp });

@@ -7,7 +7,7 @@ const login = require("./routes/auth.js");
 const register = require("./routes/register.js");
 const logout = require("./routes/logout.js");
 const mongoose = require('mongoose');
-const socketIOHandler = require('./socket');
+// const socketIOHandler = require('./socket');
 const socketIO = require("socket.io");
 dotenv.config();
 
@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 // const server2 = http.createServer(app);
 const io = require("socket.io")(server);
-socketIOHandler(server);
+// socketIOHandler(server);
 
 const PORT = process.env.PORT || 3000;
 const mongoURI = process.env.MONGOURI
