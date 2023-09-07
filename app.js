@@ -20,9 +20,9 @@ const io = require("socket.io")(server);
 
 const PORT = process.env.PORT || 3000;
 const mongoURI = process.env.MONGOURI
-
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use(express.json());
+// app.use(express.json());
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");

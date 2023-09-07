@@ -37,10 +37,10 @@ router.post('/incoming', (req, res) => {
   const body = req.body.Body;
   const timestamp = new Date().toLocaleString();
   // Log the incoming message details
+  console.log('Incoming request body:', req)
   console.log(`Received message from: ${from}`);
   console.log(`Message content: ${body}`);
   console.log(`Timestamp: ${timestamp}`);
-  console.log('Request headers:', req.headers);
 
 
   // Add the message to the array
