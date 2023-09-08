@@ -110,23 +110,23 @@ router.post('/make-call', async (req, res) => {
 //   next();
 // });
 
-// router.post('/inbound', (req, res) => {
-//   const twiml = new twilio.twiml.VoiceResponse();
-//   const dial = twiml.dial();
-//   twiml.say('Thank you for calling!');
-//   const incomingNumber = req.body.From;
-//   console.log('Incoming number:', incomingNumber);
-//   dial.client('user-client');
+router.post('/inbound', (req, res) => {
+  const twiml = new twilio.twiml.VoiceResponse();
+  const dial = twiml.dial();
+  twiml.say('Thank you for calling!');
+  const incomingNumber = req.body.From;
+  console.log('Incoming number:', incomingNumber);
+  dial.client('user-client');
 
-//   res.type('text/xml');
-//   res.send(twiml.toString());
-//   // io.emit('incomingCall', { from: incomingNumber });
-//   if (req.io) {
-//     req.io.emit('incomingCall', { from: incomingNumber });
-//   } else {
-//     console.warn("'io' is not defined; event not emitted.");
-//   }
-// });
+  res.type('text/xml');
+  res.send(twiml.toString());
+  // io.emit('incomingCall', { from: incomingNumber });
+  if (req.io) {
+    req.io.emit('incomingCall', { from: incomingNumber });
+  } else {
+    console.warn("'io' is not defined; event not emitted.");
+  }
+});
 // router.post('/inbound', (req, res) => {
 //   const twiml = new twilio.twiml.VoiceResponse();
 //   const dial = twiml.dial();
