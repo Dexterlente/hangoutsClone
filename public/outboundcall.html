@@ -133,7 +133,7 @@ button:hover {
         const socket = io(); // Connect to the Socket.IO server
   
         document.getElementById('startCall').addEventListener('click', async () => {
-          try {
+          // try {
             // Make a request to your backend to initiate the call
             const response = await fetch('http://localhost:5000/make-call', {
               method: 'POST',
@@ -144,40 +144,16 @@ button:hover {
             });
   
             const data = await response.json();
-            if (data.success) {
-              startAudioTransmission();
-            } else {
-              console.error(data.error);
-            }
-          } catch (error) {
-            console.error(error);
-          }
+            // if (data.success) {
+            //   startAudioTransmission();
+            // } else {
+            //   console.error(data.error);
+            // }
+          // } catch (error) {
+          //   console.error(error);
+          // }
         });
   
-        function startAudioTransmission() {
-          // Capture audio from the microphone
-          navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-            const mediaRecorder = new MediaRecorder(stream);
-  
-            mediaRecorder.ondataavailable = (event) => {
-              if (event.data.size > 0) {
-                socket.emit('audioData', event.data);
-              }
-            };
-  
-            mediaRecorder.start();
-          }).catch((error) => {
-            console.error(error);
-          });
-  
-          // Receive and play audio data from other participants
-          socket.on('audioData', (data) => {
-            // Create an audio element and play the received audio
-            const audio = new Audio();
-            audio.src = URL.createObjectURL(data);
-            audio.play();
-          });
-        }
       </script>
   </div>
 </body>
